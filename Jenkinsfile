@@ -2,6 +2,25 @@
  * This Pipeline is *not* used for actual image publishing.
  * This is currently handled through Automated Builds using standard Docker Hub feature
 */
+
+pipeline {
+  agent none
+
+  stages {
+       stage('PublishAndTests') {
+          environment {
+              STAGE='prod'
+          }
+          agent {
+            label 'build-python36'
+          }
+      }
+      steps {
+        sh 'java -version'
+      }
+    }
+  }
+
 pipeline {
     agent none
 
